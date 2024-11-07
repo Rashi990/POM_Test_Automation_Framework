@@ -7,18 +7,18 @@ import org.openqa.selenium.support.PageFactory;
 
 public class DarazHomePage extends BasePage{
 
-    WebDriver driver;
-
     @FindBy(xpath = "//input[@id='q']")
     public WebElement SearchBox;
 
     @FindBy(xpath = "//*[@id='topActionHeader']//form//a")
     public WebElement SearchButton;
 
+    @FindBy(xpath = "//a[@class='white' and text()='Login']")
+    public WebElement SelectLoginButton;
+
     public DarazHomePage(WebDriver driver){
         super(driver);
     }
-
 
     //Methods for above WebElements
     public void typeTextToSearchBox(String searchText){
@@ -30,12 +30,18 @@ public class DarazHomePage extends BasePage{
 
         if (searchText.equalsIgnoreCase("headphones")) {
             return (T) PageFactory.initElements(driver, DarazHeadphonesPage.class);
-        } else {
+        } else if (searchText.equalsIgnoreCase("shoes")){
             return (T) PageFactory.initElements(driver, DarazShoesPage.class);
+        } else if (searchText.equalsIgnoreCase("frocks")){
+            return (T) PageFactory.initElements(driver, DarazFrocksPage.class);
+        } else {
+            return (T) PageFactory.initElements(driver, DarazLadiesWatchPage.class);
         }
     }
 
-
-
+    public DarazLoginPage clickSelectLoginButton(){
+        SelectLoginButton.click();
+        return PageFactory.initElements(driver, DarazLoginPage.class);
+    }
 
 }

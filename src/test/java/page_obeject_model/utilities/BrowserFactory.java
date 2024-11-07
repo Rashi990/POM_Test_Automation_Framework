@@ -39,4 +39,8 @@ public class BrowserFactory {
     public WebDriver getDriver(){
         return threadLocal.get();
     }
+
+    public void quitDriver(){
+        threadLocal.get().quit();
+    }
 }
